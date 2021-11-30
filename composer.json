@@ -1,0 +1,26 @@
+{
+    "name": "lfbellante/vies",
+    "description": "This package controls the vat id in VIES system and returns company information if exist.",
+    "type": "library",
+    "require": {
+        "ricorocks-digital-agency/soap": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lfbellante\\Vies\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Luca Francesco Bellante",
+            "email": "lfbellante@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Lfbellante\\Vies\\ViesServiceProvider"
+            ]
+        }
+    }
+}
