@@ -31,8 +31,5 @@ class ViesServiceProvider extends ServiceProvider
                 'vies'
             );
         }
-
-        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
-
     }
 }
