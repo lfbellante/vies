@@ -3,7 +3,7 @@
 namespace Lfbellante\Vies\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Lfbellante\Vies\Http\Resources\Company;
+use Illuminate\Support\Str;
 use RicorocksDigitalAgency\Soap\Facades\Soap;
 use Throwable;
 
@@ -21,9 +21,9 @@ class ViesController extends Controller
     /**
      * @param string $vatId
      * @param  string  $countryCode
-     * @return \never|Company
+     * @return array
      */
-    public function checkVat(string $vatId, string $countryCode = 'IT'): \never|Company
+    public static function checkVat(string $vatId, string $countryCode = 'IT'): array
     {
         $company = Soap::to(config('vies.endpoint'))
             ->call('checkVat',
@@ -34,9 +34,30 @@ class ViesController extends Controller
             );
 
         if ($company->valid) {
-            return new Company($company);
+            return [
+                'vatId' => $company->vatNumber,
+                'companyName' => $company->name,
+                'address' => ViesController::format($company->address),
+            ];
         }
 
-        return abort(404);
+        return [];
+    }
+
+    /**
+     * @param $address
+     * @return array
+     */
+    private static function format($address): array
+    {
+        $address = Str::of($address)->explode(PHP_EOL);
+        $cityDetails = Str::of($address[1])->explode(' ');
+
+        return [
+            'street' => $address[0],
+            'city' => $cityDetails[1],
+            'province' => $cityDetails[2],
+            'postalCode' => $cityDetails[0],
+        ];
     }
 }

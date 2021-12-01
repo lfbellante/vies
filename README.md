@@ -18,22 +18,8 @@ php artisan vendor:publish --tag=vies
 ```
 
 ## Usage
-Browse ```{your.domain}/vies/{vatId}``` for example ```http:localhost/vies/00488410010``` (Es. TIM S.p.A.)
-
-###Response
-```JSON
-{
-    "data": {
-      "vatId": "00488410010",
-      "companyName": "TIM S.P.A.",
-      "address": {
-            "street": "VIA GAETANO NEGRI 1 ",
-            "city": "MILANO",
-            "province": "MI",
-            "postalCode": "20123"
-      }
-    }
-}
+```php
+ViesController::checkVat('00488410010');
 ```
 
 ## Contributing
