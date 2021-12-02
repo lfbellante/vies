@@ -19,9 +19,23 @@ php artisan vendor:publish --tag=vies
 
 ## Usage
 ```php
-ViesController::checkVat('00488410010');
+Vies::checkVat('VAT Number', 'Country Code, default IT');
 ```
 
+## Response
+```JSON
+{
+    "vatId": "00488410010",
+    "companyName": "TIM S.P.A.",
+    "address": {
+        "street": "VIA GAETANO NEGRI 1 ",
+        "city": "MILANO",
+        "province": "MI",
+        "postalCode": "20123"
+    }
+}
+
+```
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
